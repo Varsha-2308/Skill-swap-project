@@ -1,0 +1,159 @@
+/* ============ USER SKILLS PAGE ============ */
+
+/* Full page wrapper */
+.user-skills-page {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;      /* header/card/back-link stacked */
+  align-items: center;         /* center horizontally */
+  justify-content: center;     /* center vertically */
+  padding: 24px 0;
+  box-sizing: border-box;
+
+  /* Soft blue-violet background to match rest of app */
+  background: radial-gradient(circle at top left, #4f46e5, #0f172a 60%);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  color: #e5e7eb;
+}
+
+/* Main card that holds the skills table/info */
+.user-skills-page .card {
+  width: 90%;
+  max-width: 900px;
+  border-radius: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.45);
+  box-shadow: 0 18px 35px rgba(15, 23, 42, 0.7);
+  background: rgba(15, 23, 42, 0.98);
+}
+
+/* Inner content area */
+.user-skills-page .card-body {
+  border-radius: 18px;
+  padding: 20px 22px;
+}
+
+/* Header text: page title + user name line */
+.user-skills-page .card-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 4px;
+  color: #f9fafb;
+}
+
+.user-skills-page .card-subtitle {
+  font-size: 13px;
+  color: #cbd5f5;
+  margin-bottom: 14px;
+}
+
+/* If you use something like "Skills for: Varsha" in a <p> or <small> */
+.user-skills-page .text-muted {
+  color: #9ca3af !important;
+}
+
+/* Add skill button (if you have one using .btn-primary) */
+.user-skills-page .btn-primary {
+  border-radius: 999px;
+  padding-inline: 16px;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  background: linear-gradient(135deg, #f97316, #ec4899);
+  box-shadow: 0 10px 22px rgba(236, 72, 153, 0.5);
+}
+
+/* Skills table wrapper */
+.user-skills-page .table-responsive {
+  margin-top: 10px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  background: rgba(15, 23, 42, 0.98);
+}
+
+/* Table itself */
+.user-skills-page table {
+  margin-bottom: 0;
+  font-size: 14px;
+  color: #e5e7eb;
+}
+
+.user-skills-page thead {
+  background: rgba(15, 23, 42, 1);
+}
+
+.user-skills-page th,
+.user-skills-page td {
+  padding: 9px 12px;
+}
+
+.user-skills-page th {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid rgba(71, 85, 105, 0.8);
+  color: #e5e7eb;
+}
+
+.user-skills-page tbody tr:nth-child(even) {
+  background: rgba(15, 23, 42, 0.9);
+}
+
+.user-skills-page tbody tr:hover {
+  background: rgba(148, 163, 184, 0.22);
+}
+
+/* If you are using badges for skill level, category, etc. */
+.user-skills-page .badge {
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 11px;
+}
+
+.user-skills-page .badge-level {
+  background: rgba(52, 211, 153, 0.15);
+  color: #6ee7b7;
+  border: 1px solid rgba(16, 185, 129, 0.5);
+}
+
+.user-skills-page .badge-category {
+  background: rgba(59, 130, 246, 0.15);
+  color: #93c5fd;
+  border: 1px solid rgba(59, 130, 246, 0.5);
+}
+
+/* Action buttons inside skills table (Edit / Delete / View, etc.) */
+.user-skills-page .btn-sm {
+  border-radius: 999px;
+  font-size: 12px;
+  padding: 3px 10px;
+}
+
+/* Back link under the card (if you have one) */
+.user-skills-page > .mt-3,
+.user-skills-page > .back-link {
+  margin-top: 12px;
+}
+
+.user-skills-page a.small {
+  color: #e5e7eb;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.user-skills-page a.small:hover {
+  text-decoration: underline;
+}
+
+/* Responsive tweak */
+@media (max-width: 768px) {
+  .user-skills-page .card {
+    width: 95%;
+  }
+
+  .user-skills-page .card-body {
+    padding: 16px 14px;
+  }
+}
