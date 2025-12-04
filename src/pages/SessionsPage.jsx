@@ -16,9 +16,7 @@ export default function SessionsPage() {
   });
 
   const fetchSessions = () =>
-    api
-      .get(`/api/sessions/user/${userId}`)
-      .then((res) => setSessions(res.data));
+    api.get(`/api/sessions/user/${userId}`).then((res) => setSessions(res.data));
 
   useEffect(() => {
     api.get(`/api/users/${userId}`).then((res) => setUser(res.data));
@@ -58,20 +56,31 @@ export default function SessionsPage() {
     }
   };
 
+  // 🔴 DELETE Handler
+  const handleDelete = async (id) => {
+    const ok = window.confirm("Are you sure you want to delete this session?");
+    if (!ok) return;
+
+    try {
+      await api.delete(`/api/sessions/${id}`);
+      setSessions((prev) => prev.filter((s) => s.id !== id));
+    } catch (err) {
+      console.error(err);
+      alert("Error deleting session");
+    }
+  };
+
   return (
     <div className="card shadow-sm">
       <div className="card-body">
+
         <div className="d-flex justify-content-between align-items-center mb-3">
-          <div>
-            <h3 className="card-title mb-0">
-              Sessions for User #{userId}
-              {user && ` – ${user.name}`}
-            </h3>
-            
-          </div>
+          <h3 className="card-title mb-0">
+            Sessions for User #{userId} {user && `– ${user.name}`}
+          </h3>
         </div>
 
-        {/* Booking form */}
+        {/* Booking Form */}
         <div className="mb-4">
           <h5>Book New Session</h5>
           <form className="row g-2" onSubmit={handleBook}>
@@ -85,6 +94,7 @@ export default function SessionsPage() {
                 required
               />
             </div>
+
             <div className="col-md-3">
               <label className="form-label">Learner ID</label>
               <input
@@ -95,6 +105,7 @@ export default function SessionsPage() {
                 required
               />
             </div>
+
             <div className="col-md-3">
               <label className="form-label">Skill</label>
               <select
@@ -112,6 +123,7 @@ export default function SessionsPage() {
                 ))}
               </select>
             </div>
+
             <div className="col-md-3">
               <label className="form-label">Date & Time</label>
               <input
@@ -124,18 +136,16 @@ export default function SessionsPage() {
                 required
               />
             </div>
+
             <div className="col-12 d-flex justify-content-end">
               <button type="submit" className="btn btn-primary">
                 Book
               </button>
             </div>
           </form>
-          <small className="text-muted">
-            Format: <code>YYYY-MM-DDTHH:MM:SS</code>
-          </small>
         </div>
 
-        {/* Sessions list */}
+        {/* Sessions List */}
         <div className="table-responsive">
           <table className="table table-striped align-middle">
             <thead className="table-light">
@@ -146,49 +156,55 @@ export default function SessionsPage() {
                 <th>Skill</th>
                 <th>DateTime</th>
                 <th>Status</th>
-                <th style={{ width: "220px" }}>Actions</th>
+                <th style={{ width: "260px" }}>Actions</th>
               </tr>
             </thead>
+
             <tbody>
               {sessions.map((s) => (
                 <tr key={s.id}>
                   <td>{s.id}</td>
-                  <td>
-                    #{s.teacher?.id} {s.teacher?.name}
-                  </td>
-                  <td>
-                    #{s.learner?.id} {s.learner?.name}
-                  </td>
+                  <td>#{s.teacher?.id} {s.teacher?.name}</td>
+                  <td>#{s.learner?.id} {s.learner?.name}</td>
                   <td>{s.skill?.name}</td>
                   <td>{s.dateTime}</td>
                   <td>{s.status}</td>
+
                   <td>
                     <div className="d-flex flex-wrap gap-1">
                       <button
-                        type="button"
                         className="btn btn-success btn-sm"
                         onClick={() => updateStatus(s.id, "CONFIRMED")}
                       >
                         Confirm
                       </button>
+
                       <button
-                        type="button"
                         className="btn btn-primary btn-sm"
                         onClick={() => updateStatus(s.id, "COMPLETED")}
                       >
                         Complete
                       </button>
+
                       <button
-                        type="button"
-                        className="btn btn-danger btn-sm"
+                        className="btn btn-warning btn-sm"
                         onClick={() => updateStatus(s.id, "CANCELLED")}
                       >
                         Cancel
+                      </button>
+
+                      {/* 🔴 DELETE BUTTON */}
+                      <button
+                        className="btn btn-danger btn-sm"
+                        onClick={() => handleDelete(s.id)}
+                      >
+                        Delete
                       </button>
                     </div>
                   </td>
                 </tr>
               ))}
+
               {sessions.length === 0 && (
                 <tr>
                   <td colSpan={7} className="text-muted">
@@ -200,11 +216,10 @@ export default function SessionsPage() {
           </table>
         </div>
       </div>
-       <div>
-              <Link to="/users" className="small">
-                ← Back to users
-              </Link>
-            </div>
+
+      <div>
+        <Link to="/users" className="small">← Back to users</Link>
+      </div>
     </div>
   );
 }

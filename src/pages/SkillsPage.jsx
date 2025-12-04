@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../api/axios";
-import "../App.css";
+// import "../App.css";
+import "../Styles/skillpage.css";
 
 
 export default function SkillsPage() {
@@ -54,7 +55,7 @@ export default function SkillsPage() {
           <div className="col-sm-9 col-md-10">
             <input
               className="form-control"
-              placeholder="New skill name (e.g., Java, React, Guitar)"
+              placeholder="New skill name (e.g., Java, React, Angular)"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />

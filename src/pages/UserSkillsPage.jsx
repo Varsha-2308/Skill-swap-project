@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import api from "../api/axios";
 
-import "../Styles/UserSkill.css";
+import "../Styles/userskills.css";
 
 export default function UserSkillsPage() {
   const { userId } = useParams();
@@ -22,7 +22,9 @@ export default function UserSkillsPage() {
     api.get("/api/skills").then((res) => setSkills(res.data));
 
   const fetchUserSkills = () =>
-    api.get(`/api/user-skills/${userId}`).then((res) => setUserSkills(res.data));
+    api
+      .get(`/api/user-skills/${userId}`)
+      .then((res) => setUserSkills(res.data));
 
   useEffect(() => {
     fetchUser();
@@ -38,26 +40,29 @@ export default function UserSkillsPage() {
   const handleAdd = async (e) => {
     e.preventDefault();
     if (!form.skillId) return;
+
     try {
       await api.post(
         `/api/user-skills/add?userId=${userId}&skillId=${form.skillId}&type=${form.type}&level=${form.level}`
       );
+
       setForm({ skillId: "", type: "TEACH", level: "BEGINNER" });
       fetchUserSkills();
-    } catch (err) { 
+    } catch (err) {
       console.error("ERROR ADDING USER SKILL:", err?.response || err);
-  const backendMsg =
-    err?.response?.data?.message ||
-    err?.response?.data?.error ||
-    err?.response?.data ||
-    err.message;
 
-  alert(backendMsg || "Error adding user skill");
+      const backendMsg =
+        err?.response?.data?.message ||
+        err?.response?.data?.error ||
+        err?.response?.data ||
+        err.message;
+
+      alert(backendMsg || "Error adding user skill");
     }
   };
 
   return (
-    <div className="card shadow-sm">
+    <div className="skills-container">
       <div className="card-body">
         <div className="d-flex justify-content-between align-items-center mb-3">
           <div>
@@ -65,7 +70,6 @@ export default function UserSkillsPage() {
               Skills for User #{userId}
               {user && ` – ${user.name}`}
             </h3>
-            
           </div>
         </div>
 
@@ -150,11 +154,12 @@ export default function UserSkillsPage() {
           </table>
         </div>
       </div>
+
       <div>
-              <Link to="/users" className="small">
-                ← Back to users
-              </Link>
-            </div>
+        <Link to="/users" className="small">
+          ← Back to users
+        </Link>
+      </div>
     </div>
   );
 }

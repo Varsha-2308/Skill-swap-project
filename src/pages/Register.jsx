@@ -90,14 +90,14 @@ const Register = () => {
 
         <form className="auth-form" onSubmit={handleRegister}>
           <div className="auth-field">
-            <label htmlFor="name">Full Name</label>
+            <label htmlFor="name">Your Name</label>
             <div className="auth-input-wrapper">
               <span className="input-icon">👤</span>
               <input
                 id="name"
                 name="name"
                 type="text"
-                placeholder="e.g. Varsha Peetam"
+                placeholder="Enter your Full Name"
                 className="auth-input"
                 required
               />
@@ -105,14 +105,14 @@ const Register = () => {
           </div>
 
           <div className="auth-field">
-            <label htmlFor="email">College Email</label>
+            <label htmlFor="email">Email</label>
             <div className="auth-input-wrapper">
               <span className="input-icon">@</span>
               <input
                 id="email"
                 name="email"
                 type="email"
-                placeholder="you@college.edu"
+                placeholder="you@gmail.com"
                 className="auth-input"
                 required
               />

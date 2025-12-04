@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import api from "../api/axios";
 import "../App.css";
+import "../Styles/matchespage.css"
 
 export default function MatchesPage() {
   const { userId } = useParams();

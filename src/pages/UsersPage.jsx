@@ -79,12 +79,6 @@ export default function UsersPage() {
                         >
                           Sessions
                         </Link>
-                        <Link
-                          to={`/users/${u.id}/edit`}
-                          className="btn btn-outline-dark btn-sm"
-                        >
-                          Edit
-                        </Link>
                       </div>
                     </td>
                   </tr>
